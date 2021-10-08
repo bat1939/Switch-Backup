@@ -1,8 +1,8 @@
-from netmiko import ConnectHandler
-from datetime import datetime
-from secrects import switch_user, switch_password
 import os
 import json
+from datetime import datetime
+from netmiko import ConnectHandler
+from secrects import switch_user, switch_password
 
 #Loading the device json file and adding to a variable 
 device_json = open (os.path.expanduser("~/scripts/switch.json"), "r")
