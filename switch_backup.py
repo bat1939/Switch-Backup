@@ -36,14 +36,17 @@ for switch in device_list['switch_list']:
 #Trying logging into the switch to do a show run and save that to a text file
     try:
         with ConnectHandler(**device) as net_connect:
+            no_pager_command = ""
             if switch['os'] == "brocade_fastiron":
-                net_connect.send_command("skip-page-display")
-                running_config = net_connect.send_command(show_run)
-                net_connect.disconnect()
+                no_pager_command = "skip-page-display"
+                #net_connect.send_command("skip-page-display")
             elif switch['os'] == "dell_os10":
-                net_connect.send_command("terminal length 0")
-                running_config = net_connect.send_command(show_run)
-                net_connect.disconnect()
+                no_pager_command = "terminal length 0"
+                #net_connect.send_command("terminal length 0")
+            if no_pager_command:
+                net_connect.send_command(no_pager_command)
+            running_config = net_connect.send_command(show_run)
+            net_connect.disconnect()
     except:
         l.write("Device {} IP {} has failed the backup \n".format(switch['hostname'],switch['ip_address']))
         continue
