@@ -56,7 +56,6 @@ for switch in device_list['switch_list']:
     os.makedirs(os.path.expanduser(hostname_dir), exist_ok=True)
     hostname_file = "running_config_{}.txt".format(date)
     f = open(os.path.join(os.path.expanduser(hostname_dir), hostname_file), "w+")
-    #f = open("/home/vetadmin/scripts/config_switch/"+switch['hostname']+"/running_config_{}.txt".format(date), "w+")
     f.write(running_config)
     f.close()
     d+=1
