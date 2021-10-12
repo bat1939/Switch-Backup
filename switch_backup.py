@@ -1,5 +1,6 @@
 import os
 import json
+import logging
 from datetime import datetime
 from netmiko import ConnectHandler
 from secrects import switch_user, switch_password
@@ -20,9 +21,15 @@ d = 0 #Setting done count to zero
 logpath = '~/scripts/logging'
 logfile = 'switch_backup.log'
 os.makedirs(os.path.expanduser(logpath), exist_ok=True)
+logging.basicConfig(
+    filename=os.path.join(os.path.expanduser(logpath), logfile),
+    level=logging.WARNING,
+    format='%(asctime)s:%(levelname)s:%(message)s'
+    )
 
 l = open (os.path.join(os.path.expanduser(logpath), logfile), 'a')
 l.write('\n' + date + '\n')
+
 
 #Opening the switch.json file that has all the switch ip information
 for switch in device_list['switch_list']:
