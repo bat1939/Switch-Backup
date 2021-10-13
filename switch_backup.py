@@ -52,8 +52,8 @@ for switch in device_list['switch_list']:
                 net_connect.send_command(no_pager_command)
             running_config = net_connect.send_command(show_run)
             net_connect.disconnect()
-    except:
-        l.write('Device {} IP {} has failed the backup \n'.format(switch['hostname'],switch['ip_address']))
+    except Exception as e:
+        logging.error('Device {} {} has failed the backup: {}'.format(switch['hostname'], switch['ip_address'], e))
         continue
 
 ###Create folder and file by hostname###
