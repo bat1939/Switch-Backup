@@ -4,6 +4,7 @@ import logging
 from datetime import datetime
 from netmiko import ConnectHandler
 from secrects import switch_user, switch_password
+from email_log import email
 
 #Loading the device json file and adding to a variable 
 device_json = open (os.path.expanduser('~/scripts/switch.json'), 'r')
@@ -61,3 +62,7 @@ for switch in device_list['switch_list']:
     f.write(running_config)
     f.close()
     d+=1
+    
+    
+if (d < len(device_list['switch_list'])):
+    email(logpath,logfile)
